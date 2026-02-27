@@ -5,10 +5,11 @@ let cpsDisplay = document.getElementById("cps");
 let bakerBtn = document.getElementById("item-2");
 let factoryBtn = document.getElementById("item-3");
 
-let cookieCount = 0;
+let cookieCount = Number(localStorage.getItem("cookieCount"));
 counterDisplay.textContent = cookieCount;
 
-let cookiesPerSecond = 0;
+let cookiesPerSecond = Number(localStorage.getItem("cookiesPerSecond"));
+cpsDisplay.textContent = `${cookiesPerSecond}/S`;
 
 // Button actions
 cookieBtn.addEventListener("click", function(){
@@ -53,4 +54,11 @@ factoryBtn.addEventListener("click", function(){
 setInterval(function(){
     cookieCount = cookieCount + cookiesPerSecond;
     counterDisplay.textContent = cookieCount;
+    saveGame();
 }, 1000)
+
+// Save game data to local storage
+function saveGame(){
+    localStorage.setItem("cookieCount", cookieCount);
+    localStorage.setItem("cookiesPerSecond", cookiesPerSecond);
+}
